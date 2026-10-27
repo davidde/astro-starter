@@ -1,0 +1,65 @@
+---
+// Import the global.tw.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import '../styles/global.tw.css';
+import type { ImageMetadata } from 'astro';
+import FallbackImage from '../../public/favicon.svg';
+import { Font } from 'astro:assets';
+
+
+interface Props {
+  title: string;
+  description: string;
+  // string for `/public` images, ImageMetadata for Astro optimized images from `/assets/images`:
+  image?: string | ImageMetadata;
+}
+
+const { title, description, image = FallbackImage } = Astro.props;
+const imagePath = typeof image === 'string' ? image : image.src;
+const imageURL = new URL(imagePath, Astro.site ?? Astro.url.origin);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Anti-FOUC Theme Initialization Script: -->
+<script is:inline>
+  const theme = localStorage.getItem('theme') ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+</script>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<!-- If RSS is used (`@astrojs/rss` is installed): -->
+<!--
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={title}
+  href={new URL('rss.xml', Astro.site)}
+/>
+-->
+<meta name="generator" content={Astro.generator} />
+
+<Font cssVariable="--font-work-sans" preload />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageURL} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />

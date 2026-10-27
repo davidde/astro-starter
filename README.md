@@ -1,43 +1,62 @@
-# Astro Starter Kit: Minimal
-
+# Astro Starter Kit
 ```sh
-bun create astro@latest -- --template minimal
+bun create astro@latest my-new-project -- --template davidde/astro-starter
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Installed packages
+```sh
+"dependencies": {
+    "astro": "^7.4.2",
+    "@astrojs/sitemap": "^3.7.4", # Auto-generates sitemap-index.xml for SEO
+    "sharp": "^0.35.5" # Fast, native C++ image processing for Astro's <Image/> component
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3", # TailwindCSS!
+    "@types/bun": "^1.4.4" # Typescript!
+  }
+```
+
+### Possible additions
+```sh
+# Install when building a blog/content collection with an RSS feed:
+bun add @astrojs/rss
+# Install when upgrading markdown with custom components:
+bun add @astrojs/mdx
+```
 
 ## 🚀 Project Structure
-
 Inside of your Astro project, you'll see the following folders and files:
-
 ```text
 /
 ├── public/
 ├── src/
+│   └── assets/
+│   └── components/
+│   └── content/
+│   └── layout/
 │   └── pages/
 │       └── index.astro
+│   └── styles/
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
+* Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+* There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+* Astro layouts, which are reusable templates that repeat across several pages, go in `src/layouts/`.
+* User content goes in `src/content/` as markdown files, and will be generated into complete HTML webpages by Astro, using the pages in `src/pages/`, which themselves use the layout templates in `src/layouts/`.
+* Any static assets, like favicon images, can be placed in the `public/` directory, while assets that should be optimized (fonts, images, etc.) can be placed in `src/assets/`.
 
 ## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
+All commands are run from a terminal at the root of the project:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
 | `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+| `bun dev`                 | Starts local dev server at `localhost:4321`      |
+| `bun build`               | Build your production site to `./dist/`          |
+| `bun preview`             | Preview your build locally, before deploying     |
+| `bun astro ...`           | Run CLI commands like `astro add`, `astro check` |
+| `bun astro -- --help`     | Get help using the Astro CLI                     |
 
 ## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Feel free to check out the [Astro documentation](https://docs.astro.build) or jump into the [Astro Discord server](https://astro.build/chat).

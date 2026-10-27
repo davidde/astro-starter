@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-background: light-dark(white, oklch(18.24% 0.0152 266.74););
+  --color-fg: light-dark(oklch(28.63% 0.0453 270.93), oklch(73.313% 0.03595 270.897));
+
+  --animate-rotate: rotate 5s linear infinite;
+  @keyframes rotate {
+    from { transform: rotate(0deg) scale(1.5); }
+    to { transform: rotate(360deg) scale(1.5); }
+  }
+}
+
+@layer base {
+  html[data-theme="light"] { color-scheme: light; }
+  html[data-theme="dark"] { color-scheme: dark; }
+
+  :root {
+    color-scheme: light dark;
+    font-size: 10px;
+    background-color: var(--color-background);
+    color: var(--color-fg);
+
+    --fancy-gradient-start: light-dark(oklch(59.025% 0.22526 275.65), oklch(55.6% 0.179 254.9));
+    --fancy-gradient-mid: light-dark(oklch(57.045% 0.24293 300.936), oklch(84.7% 0.139 202.4));
+    --fancy-gradient-end: light-dark(oklch(73.58% 0.17175 305.032), oklch(50.4% 0.224 291.6));
+    --fancy-gradient: linear-gradient(135deg,
+      var(--fancy-gradient-start) 0%,
+      var(--fancy-gradient-mid) 50%,
+      var(--fancy-gradient-end) 100%
+    );
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    /* outline: 1px solid red; */
+  }
+
+  body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-family: var(--font-work-sans);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    max-width: 100%;
+    font-size: 2rem;
+    line-height: 1.7;
+  }
+}
+
+/* Reusable multi-property patterns: */
+@layer components {
+  .sr-only { /* Screen Reader Only (i.e. invisible by default, but readable by assistive tech) */
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+    clip: rect(1px 1px 1px 1px);
+    /* maybe deprecated but we need to support legacy browsers */
+    clip: rect(1px, 1px, 1px, 1px);
+    /* modern browsers, clip-path works inwards from each corner */
+    clip-path: inset(50%);
+    /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+    white-space: nowrap;
+  }
+}
+
+/* Create a vibrantly colored text gradient: */
+@utility fancy-text {
+  background: var(--fancy-gradient);
+  background-clip: text;
+  color: transparent;
+  max-width: max-content;
+}
+
+.fancy-links a {
+  @apply fancy-text;
+}
+
+/* E.g: wordsp-[0.35em] */
+@utility wordsp-* {
+  word-spacing: --value([length]);
+}

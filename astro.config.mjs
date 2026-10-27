@@ -1,5 +1,41 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
+
 
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  site: 'https://example.com',
+  integrations: [
+    // mdx(),
+    sitemap()
+  ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: 'Work Sans',
+      cssVariable: '--font-work-sans',
+      fallbacks: ['sans-serif'],
+      options: {
+        variants: [
+          {
+            src: ['./src/assets/fonts/WorkSans-VariableFont-Normal.woff2'],
+            weight: '100 900',
+            style: 'normal',
+            display: 'swap',
+          },
+          {
+            src: ['./src/assets/fonts/WorkSans-VariableFont-Italic.woff2'],
+            weight: '100 900',
+            style: 'italic',
+            display: 'swap',
+          },
+        ],
+      },
+    },
+  ],
+});
