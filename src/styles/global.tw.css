@@ -2,8 +2,10 @@
 
 
 @theme {
-  --color-background: light-dark(white, oklch(18.24% 0.0152 266.74););
+  --color-background: light-dark(oklch(93.888% 0.01339 262.455), oklch(18.24% 0.0152 266.74));
   --color-fg: light-dark(oklch(28.63% 0.0453 270.93), oklch(73.313% 0.03595 270.897));
+  --color-border: light-dark(oklch(89.974% 0.00765 260.877), oklch(32.814% 0.00601 258.438));
+  --color-shadow: light-dark(oklch(55.82% 0.0724 266.12 / 0.75), oklch(36.359% 0.01647 266.497 / 0.25));
 
   --animate-rotate: rotate 5s linear infinite;
   @keyframes rotate {
@@ -22,6 +24,10 @@
     background-color: var(--color-background);
     color: var(--color-fg);
 
+    --box-shadow:
+      0 2px 6px var(--color-shadow),
+      0 8px 24px var(--color-shadow),
+      0 16px 32px var(--color-shadow);
     --fancy-gradient-start: light-dark(oklch(59.025% 0.22526 275.65), oklch(55.6% 0.179 254.9));
     --fancy-gradient-mid: light-dark(oklch(57.045% 0.24293 300.936), oklch(84.7% 0.139 202.4));
     --fancy-gradient-end: light-dark(oklch(73.58% 0.17175 305.032), oklch(50.4% 0.224 291.6));
@@ -68,6 +74,53 @@
     clip-path: inset(50%);
     /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
     white-space: nowrap;
+  }
+
+  /* Markdown styling: */
+  :where(.markdown) {
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700; line-height: 1.2; margin-block: 1.3em 0.2em;
+      /* Reduce top margin of headers that directly follow another header: */
+      &:is(h1, h2, h3, h4, h5, h6) + & {
+        margin-top: 0.25em;
+      }
+      /* Increase bottom margin of headers not followed directly by another header: */
+      &:has(+ :not(h1, h2, h3, h4, h5, h6)) {
+        margin-bottom: 0.5em;
+      }
+    }
+    h1 { font-size: 3.4em; }
+    h2 { font-size: 2.9em; }
+    h3 { font-size: 2.3em; }
+    h4 { font-size: 1.9em; }
+    h5 { font-size: 1.7em; }
+    h6 { font-size: 1.5em; }
+    p, ul, ol, blockquote, pre, table, figure { margin-block: 1em; }
+    ul { list-style: disc; padding-left: 2.5em; }
+    ul ul { list-style-type: circle; padding-left: 1.5em; }
+    ul ul ul { list-style-type: square; padding-left: 1.5em; }
+    ol { list-style: decimal; padding-left: 2.5em; }
+    a { color: var(--color-blue-600); }
+    blockquote { border-left: 4px solid var(--color-gray-300); padding-left: 1.5em; font-style: italic; font-size: 1.1em; }
+    code { font-family: var(--font-mono); font-size: 0.9em; }
+    :not(pre) > code {
+      background: light-dark(var(--color-gray-200), var(--color-gray-500));
+      color: light-dark(var(--color-gray-800), var(--color-gray-100));
+      padding: 0.1em 0.3em; border-radius: 0.25em;
+    }
+    pre { padding: 1em; border-radius: 0.5em; overflow-x: auto; }
+    img { max-width: 100%; height: auto; border-radius: 8px; }
+    hr { margin-block: 1.5em; border-color: var(--color-border); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid var(--color-border); padding: 0.5em; text-align: left; }
+    th { background: oklch(from var(--color-border) l c h / 30%); font-weight: 700; }
+  }
+
+  a {
+     color: var(--color-blue-600);
+     &:hover {
+      color: var(--color-blue-400);
+     }
   }
 }
 
