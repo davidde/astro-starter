@@ -21,28 +21,26 @@ const { title, description, pubDate, updatedDate, tags, cover, coverAlt, author,
 
 
 <BaseLayout>
-  <main class='mx-auto w-7xl max-w-[calc(100%-1.5em)]'>
-    <article class='w-full'>
-      <div class='leading-none mb-[2em]'>
-        <h1 class='mb-0'>{title}</h1>
-        <FormattedDate class='text-gray-500 text-[0.875em]' pubDate={pubDate} updatedDate={updatedDate} />
-        <hr />
-      </div>
+  <article class='w-full'>
+    <div class='leading-none mb-[2em]'>
+      <h1 class='mb-0'>{title}</h1>
+      <FormattedDate class='text-gray-500 text-[0.875em]' pubDate={pubDate} updatedDate={updatedDate} />
+      <hr />
+    </div>
 
-      <div class='w-full mb-20'>
-        {
-          cover &&
-            <Image
-              class='block rounded-4xl m-[0_auto] shadow-box'
-              width={1020}
-              height={510}
-              src={cover}
-              alt={coverAlt ?? ''}
-            />
-        }
-      </div>
+    <div class='w-full mb-20'>
+      {
+        cover &&
+          <Image
+            class='block rounded-4xl m-[0_auto] shadow-box'
+            width={1020}
+            height={510}
+            src={cover}
+            alt={coverAlt ?? ''}
+          />
+      }
+    </div>
 
-      <slot />
-    </article>
-  </main>
+    <slot />
+  </article>
 </BaseLayout>

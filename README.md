@@ -6,8 +6,9 @@ bun create astro@latest my-new-project -- --template davidde/astro-starter
 ## Installed packages
 ```sh
 "dependencies": {
-    "astro": "^7.4.2",
+    "@astrojs/mdx": "^8.1.2",
     "@astrojs/sitemap": "^3.7.4", # Auto-generates sitemap-index.xml for SEO
+    "astro": "^7.4.2",
     "sharp": "^0.35.5" # Fast, native C++ image processing for Astro's <Image/> component
   },
   "devDependencies": {
@@ -16,12 +17,13 @@ bun create astro@latest my-new-project -- --template davidde/astro-starter
   }
 ```
 
-### Possible additions
+### Possible additions/removals
 ```sh
 # Install when building a blog/content collection with an RSS feed:
 bun add @astrojs/rss
-# Install when upgrading markdown with custom components:
-bun add @astrojs/mdx
+# Remove when not using MDX:
+# (Also remove in `astro.config.mjs` integrations field)
+bun remove @astrojs/mdx
 ```
 
 ## 🚀 Project Structure

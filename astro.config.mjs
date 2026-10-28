@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
+import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -8,7 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://example.com',
   integrations: [
-    // mdx(),
+    mdx(),
     sitemap()
   ],
   vite: {
