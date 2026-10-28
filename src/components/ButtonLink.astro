@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'>;
+
+const { class: className, ...attrs } = Astro.props;
+---
+
+<a
+  {...attrs}
+  class:list={[
+    'inline-flex items-center justify-center rounded-[1.25rem] px-8 py-3.5 text-[1.8rem] font-medium no-underline',
+    // Light text on the light-mode gradient, dark text on the (brighter) dark-mode gradient:
+    'text-[light-dark(white,var(--color-background))] bg-(image:--fancy-gradient)',
+    'shadow-[0_0_25px_var(--fancy-glow-initial)] transition-all duration-300 ease-in-out',
+    'cursor-pointer will-change-[scale] backface-hidden [-webkit-font-smoothing:subpixel-antialiased]',
+    'hover:scale-105 hover:font-[550] hover:shadow-[0_0_35px_var(--fancy-glow-hover)] active:scale-98',
+    // High-contrast focus ring, only when navigating via the keyboard (e.g. using the Tab key):
+    'focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-background),0_0_0_4px_var(--color-accent)]',
+    className,
+  ]}
+>
+  <slot />
+</a>

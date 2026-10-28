@@ -42,7 +42,7 @@
       var(--fancy-gradient-end) 100%
     );
     --fancy-glow-initial: light-dark(oklch(66.087% 0.17452 291.551), oklch(37.369% 0.20725 285.417));
-    --fancy-glow-hover: light-dark(oklch(67.21% 0.21246 302.718), oklch(52.914% 0.08846 204.083));
+    --fancy-glow-hover: light-dark(oklch(67.21% 0.21246 302.718), oklch(44.639% 0.22743 286.397));
   }
 
   *, *::before, *::after {
@@ -118,41 +118,6 @@
   table { width: 100%; border-collapse: collapse; }
   th, td { border: 1px solid var(--color-border); padding: 0.5em; text-align: left; }
   th { background: oklch(from var(--color-border) l c h / 30%); font-weight: 700; }
-  .fancy-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 2rem;
-    border-radius: 1.25rem;
-    font-weight: 500;
-    font-size: 1.8rem;
-    /* Light text on the light-mode gradient, dark text on the (brighter) dark-mode gradient.
-      Also set on hover, to override the global `a:hover` color: */
-    &, &:hover { color: light-dark(white, var(--color-background)); }
-    background: var(--fancy-gradient);
-    box-shadow: 0 0 25px var(--fancy-glow-initial);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-    cursor: pointer;
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: subpixel-antialiased;
-
-    &:active { transform: scale(0.98); }
-    &:hover {
-      font-weight: 550;
-      transform: scale(1.05);
-      box-shadow: 0 0 35px var(--fancy-glow-hover);
-    }
-    /* Create a high-contrast focus ring around the element, but only when
-      a user navigates to it via the keyboard (e.g. using the Tab key). */
-    &:focus-visible {
-      outline: none;
-      box-shadow:
-        0 0 0 2px var(--color-background),
-        0 0 0 4px var(--color-accent);
-    }
-  }
 }
 
 /* Create a vibrantly colored text gradient: */
