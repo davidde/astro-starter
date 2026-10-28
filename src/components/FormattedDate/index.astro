@@ -5,10 +5,10 @@ import DateFormatter from './DateFormatter.astro';
 interface Props {
   pubDate?: Date;
   updatedDate?: Date;
-  className?: string;
+  class?: string;
 }
 
-const { pubDate, updatedDate, className } = Astro.props;
+const { pubDate, updatedDate, class: className } = Astro.props;
 ---
 
 
@@ -18,8 +18,8 @@ const { pubDate, updatedDate, className } = Astro.props;
       <DateFormatter date={pubDate} />
       {
         updatedDate &&
-          <div class="italic mt-4">
-            Last updated: <DateFormatter date={updatedDate} format="short" />
+          <div class='italic mt-4'>
+            Last updated: <DateFormatter date={updatedDate} format='short' />
           </div>
       }
     </div>

@@ -2,10 +2,10 @@
 interface Props {
   date: Date;
   format?: 'short' | 'long';
-  className?: string;
+  class?: string;
 }
 
-const { date, format = 'long', className } = Astro.props;
+const { date, format = 'long', class: className } = Astro.props;
 
 // ISO standard format for short (YYYY-MM-DD):
 // (Use getters to prevent off-by-1 date bugs, e.g. when using `date.toISOString().split('T')[0])`)

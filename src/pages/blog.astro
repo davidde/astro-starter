@@ -1,9 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import CardList from '../components/CardList/index.astro';
 import { getBlogPosts } from '../lib/content';
-import DateFormatter from '../components/FormattedDate/DateFormatter.astro';
-import { Image } from 'astro:assets';
-import placeholderCover from '../assets/images/blog-placeholder-astro.jpg';
 
 const posts = await getBlogPosts();
 ---
@@ -11,31 +9,7 @@ const posts = await getBlogPosts();
 
 <PageLayout>
   <section>
-    <h1 class="fancy-text text-[2.6em]">Current blog posts</h1>
-    <ul class="list-none pl-0 flex flex-col gap-8">
-      {
-        posts.map((post) => (
-          <li class="mb-0">
-            <a class="flex items-center gap-8" href={`/${post.id}/`}>
-              <Image
-                height={120}
-                src={post.data.cover ?? placeholderCover}
-                class="aspect-video object-cover shrink-0"
-                alt=""
-              />
-              <div>
-                <h4 class="mt-0">{post.data.title}</h4>
-                <p class="my-0">
-                  { post.data.pubDate && <DateFormatter date={post.data.pubDate} /> }
-                </p>
-                <p class="my-0">
-                  { post.data.description }
-                </p>
-              </div>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <h1 class='fancy-text text-[2.6em]'>Latest blog posts</h1>
+    <CardList cards={posts} orientation='responsive' />
   </section>
 </PageLayout>

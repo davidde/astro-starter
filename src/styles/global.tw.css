@@ -5,10 +5,16 @@
   --color-background: light-dark(oklch(93.888% 0.01339 262.455), oklch(18.24% 0.0152 266.74));
   --color-fg: light-dark(oklch(28.63% 0.0453 270.93), oklch(73.313% 0.03595 270.897));
   --color-border: light-dark(oklch(89.974% 0.00765 260.877), oklch(32.814% 0.00601 258.438));
-  --color-shadow: light-dark(oklch(55.82% 0.0724 266.12 / 0.75), oklch(36.359% 0.01647 266.497 / 0.25));
   --color-accent: light-dark(oklch(49.58% 0.2835 266.99), oklch(68.775% 0.09674 263.921));
   --color-accent-hover: light-dark(oklch(60.087% 0.21068 274.247), oklch(57.873% 0.13296 263.064));
   --color-titles: light-dark(oklch(26.966% 0.05893 265.04), oklch(55.82% 0.0724 266.12));
+  --color-shadow: light-dark(oklch(55.82% 0.0724 266.12 / 0.75), oklch(36.359% 0.01647 266.497 / 0.4));
+  --shadow-box:
+    0 2px 6px var(--color-shadow),
+    0 8px 24px var(--color-shadow),
+    0 16px 32px var(--color-shadow);
+  --shadow-card: 0 0 3px var(--color-shadow);
+  --shadow-card-hover: 0 0 32px var(--color-shadow);
 
   --animate-rotate: rotate 5s linear infinite;
   @keyframes rotate {
@@ -27,10 +33,6 @@
     background-color: var(--color-background);
     color: var(--color-fg);
 
-    --box-shadow:
-      0 2px 6px var(--color-shadow),
-      0 8px 24px var(--color-shadow),
-      0 16px 32px var(--color-shadow);
     --fancy-gradient-start: light-dark(oklch(59.025% 0.22526 275.65), oklch(55.6% 0.179 254.9));
     --fancy-gradient-mid: light-dark(oklch(57.045% 0.24293 300.936), oklch(84.7% 0.139 202.4));
     --fancy-gradient-end: light-dark(oklch(73.58% 0.17175 305.032), oklch(50.4% 0.224 291.6));
@@ -106,8 +108,8 @@
   blockquote { border-left: 0.3em solid var(--color-accent); padding-left: 1.5em; font-style: italic; font-size: 1.1em; }
   code { font-family: var(--font-mono); font-size: 0.9em; }
   :not(pre) > code { /* Inline code in single backticks: */
-    background: light-dark(var(--color-gray-200), var(--color-gray-500));
-    color: light-dark(var(--color-gray-800), var(--color-gray-100));
+    background: light-dark(var(--color-gray-300), var(--color-slate-700));
+    color: light-dark(var(--color-gray-800), var(--color-gray-300));
     padding: 0.1em 0.3em; border-radius: 0.25em;
   } /* Code blocks in triple backticks render in <pre><code>...</pre></code> tags! */
   pre { padding: 1em; border-radius: 0.5em; overflow-x: auto; }
@@ -167,4 +169,19 @@
 /* E.g: wordsp-[0.35em] */
 @utility wordsp-* {
   word-spacing: --value([length]);
+}
+
+/* Orientation of an element with `data-orientation` (and its descendants): fixed with
+  "landscape"/"portrait", or following the viewport's orientation with "responsive": */
+@custom-variant card-landscape {
+  &:where([data-orientation=landscape], [data-orientation=landscape] *) { @slot; }
+  @media (orientation: landscape) {
+    &:where([data-orientation=responsive], [data-orientation=responsive] *) { @slot; }
+  }
+}
+@custom-variant card-portrait {
+  &:where([data-orientation=portrait], [data-orientation=portrait] *) { @slot; }
+  @media (orientation: portrait) {
+    &:where([data-orientation=responsive], [data-orientation=responsive] *) { @slot; }
+  }
 }
