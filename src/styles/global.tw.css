@@ -126,7 +126,9 @@
     border-radius: 1.25rem;
     font-weight: 500;
     font-size: 1.8rem;
-    color: var(--color-border);
+    /* Light text on the light-mode gradient, dark text on the (brighter) dark-mode gradient.
+      Also set on hover, to override the global `a:hover` color: */
+    &, &:hover { color: light-dark(white, var(--color-background)); }
     background: var(--fancy-gradient);
     box-shadow: 0 0 25px var(--fancy-glow-initial);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -138,10 +140,9 @@
 
     &:active { transform: scale(0.98); }
     &:hover {
-      font-weight: 600;
+      font-weight: 550;
       transform: scale(1.05);
       box-shadow: 0 0 35px var(--fancy-glow-hover);
-      color: var(--color-shadow);
     }
     /* Create a high-contrast focus ring around the element, but only when
       a user navigates to it via the keyboard (e.g. using the Tab key). */
