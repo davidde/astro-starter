@@ -6,6 +6,9 @@
   --color-fg: light-dark(oklch(28.63% 0.0453 270.93), oklch(73.313% 0.03595 270.897));
   --color-border: light-dark(oklch(89.974% 0.00765 260.877), oklch(32.814% 0.00601 258.438));
   --color-shadow: light-dark(oklch(55.82% 0.0724 266.12 / 0.75), oklch(36.359% 0.01647 266.497 / 0.25));
+  --color-accent: light-dark(oklch(49.58% 0.2835 266.99), oklch(68.775% 0.09674 263.921));
+  --color-accent-hover: light-dark(oklch(60.087% 0.21068 274.247), oklch(57.873% 0.13296 263.064));
+  --color-titles: light-dark(oklch(26.966% 0.05893 265.04), oklch(55.82% 0.0724 266.12));
 
   --animate-rotate: rotate 5s linear infinite;
   @keyframes rotate {
@@ -79,15 +82,11 @@
   /* Markdown styling: */
   :where(.markdown) {
     h1, h2, h3, h4, h5, h6 {
-      font-weight: 700; line-height: 1.2; margin-block: 1.3em 0.2em;
+      font-weight: 700; line-height: 1.2; margin-block: 1.3em 0.2em; color: var(--color-titles);
       /* Reduce top margin of headers that directly follow another header: */
-      &:is(h1, h2, h3, h4, h5, h6) + & {
-        margin-top: 0.25em;
-      }
+      &:is(h1, h2, h3, h4, h5, h6) + & { margin-top: 0.25em; }
       /* Increase bottom margin of headers not followed directly by another header: */
-      &:has(+ :not(h1, h2, h3, h4, h5, h6)) {
-        margin-bottom: 0.5em;
-      }
+      &:has(+ :not(h1, h2, h3, h4, h5, h6)) { margin-bottom: 0.5em; }
     }
     h1 { font-size: 3.4em; }
     h2 { font-size: 2.9em; }
@@ -95,32 +94,30 @@
     h4 { font-size: 1.9em; }
     h5 { font-size: 1.7em; }
     h6 { font-size: 1.5em; }
-    p, ul, ol, blockquote, pre, table, figure { margin-block: 1em; }
-    ul { list-style: disc; padding-left: 2.5em; }
-    ul ul { list-style-type: circle; padding-left: 1.5em; }
-    ul ul ul { list-style-type: square; padding-left: 1.5em; }
-    ol { list-style: decimal; padding-left: 2.5em; }
-    a { color: var(--color-blue-600); }
-    blockquote { border-left: 4px solid var(--color-gray-300); padding-left: 1.5em; font-style: italic; font-size: 1.1em; }
+    p, blockquote, pre, table, figure { margin-block: 1em; }
+    ul, ol { padding-left: 2em; margin-bottom: 1em; }
+    ul { list-style: disc; }
+    ul ul { list-style-type: circle; padding-left: 1em; margin-bottom: 0; }
+    ul ul ul { list-style-type: square; padding-left: 1em; margin-bottom: 0; }
+    ol { list-style: decimal; }
+    li { margin-bottom: 0.25em; }
+    blockquote { border-left: 0.3em solid var(--color-accent); padding-left: 1.5em; font-style: italic; font-size: 1.1em; }
     code { font-family: var(--font-mono); font-size: 0.9em; }
-    :not(pre) > code {
+    :not(pre) > code { /* Inline code in single backticks: */
       background: light-dark(var(--color-gray-200), var(--color-gray-500));
       color: light-dark(var(--color-gray-800), var(--color-gray-100));
       padding: 0.1em 0.3em; border-radius: 0.25em;
-    }
+    } /* Code blocks in triple backticks render in <pre><code>...</pre></code> tags! */
     pre { padding: 1em; border-radius: 0.5em; overflow-x: auto; }
     img { max-width: 100%; height: auto; border-radius: 8px; }
-    hr { margin-block: 1.5em; border-color: var(--color-border); }
+    hr { margin-block: 1em; border-color: var(--color-border); }
     table { width: 100%; border-collapse: collapse; }
     th, td { border: 1px solid var(--color-border); padding: 0.5em; text-align: left; }
     th { background: oklch(from var(--color-border) l c h / 30%); font-weight: 700; }
   }
 
-  a {
-     color: var(--color-blue-600);
-     &:hover {
-      color: var(--color-blue-400);
-     }
+  a { color: var(--color-accent);
+    &:hover { color: var(--color-accent-hover); }
   }
 }
 
