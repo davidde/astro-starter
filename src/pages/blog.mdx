@@ -1,0 +1,14 @@
+---
+title: 'Blog Page'
+description: 'Blog overview page listing all blog posts.'
+layout: ../layouts/PageLayout.astro
+---
+import CardList from '../components/CardList/index.astro';
+import { getBlogPosts } from '../lib/content';
+
+export const posts = await getBlogPosts();
+
+<section>
+  <h1 class='gradient-text text-[2.6em]'>Latest blog posts</h1>
+  <CardList cards={posts} orientation='responsive' />
+</section>

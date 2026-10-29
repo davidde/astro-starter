@@ -1,6 +1,10 @@
 import { getCollection } from 'astro:content';
 
 
+// `getBlogPosts()` only returns the index file of each blogpost folder in
+// `content/blog/year/` as "BlogPost". Subposts of a Blogpost will still be built,
+// e.g. `content/blog/2026/markdown-style-guide/docs`, but NOT be listed as BlogPost.
+// These "subposts" are simply a convenience for adding supportive material.
 export async function getBlogPosts() {
   const posts = await getCollection('blog', ({ data }) => {
     return import.meta.env.PROD ? !data.draft : true;
