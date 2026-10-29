@@ -1,18 +1,14 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
 import PostLayout from '../layouts/PostLayout.astro';
+import { getBlogEntries } from '../lib/content';
 
 
-// This is what actually renders all posts.
-// We do NOT use `getBlogPosts()` from `src/lib/content.ts` here,
-// since that would only render the blog posts themselves,
-// without their supporting sub-posts (e.g. 2026/post/docs).
+// Builds a page for every blog entry, i.e. the blog posts and their subposts:
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => {
-    return import.meta.env.PROD ? !data.draft : true;
-  });
+  const entries = await getBlogEntries();
 
-  return posts.map((post) => ({
+  return entries.map((post) => ({
     params: { slug: post.id },
     props: { post },
   }));
