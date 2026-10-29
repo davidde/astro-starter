@@ -121,15 +121,15 @@
 }
 
 /* Create a vibrantly colored text gradient: */
-@utility fancy-text {
+@utility gradient-text {
   background: var(--fancy-gradient);
   background-clip: text;
   color: transparent;
   max-width: max-content;
 }
 
-.fancy-links a {
-  @apply fancy-text;
+.gradient-links a {
+  @apply gradient-text;
 }
 
 /* E.g: wordsp-[0.35em] */
